@@ -1,0 +1,1039 @@
+/* ------------------------ Variáveis de Cores ------------------------ */
+:root {
+    --azul-escuro: #1e2a38;
+    --azul: #395b9e;
+    --azul-claro: #e6f0fa;
+    --branco: #ffffff;
+    --cinza: #f5f5f5;
+    --cinza-borda: #dcdcdc;
+    --cinza-texto: #666;
+    --preto: #000000;
+    --vermelho-suave: #f8d7da;
+    --vermelho-intenso: #dc3545;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    background-color: var(--preto);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.container {
+    width: 100%;
+    height: 100%;
+    background-color: var(--azul-claro);
+    border: 2px solid var(--azul);
+    display: flex;
+    flex-direction: column;
+}
+
+/* ------------------------Cabeçalho-------------------------- */
+a {
+    text-decoration: none;
+    color: white;
+    transition: color 0.2s ease, transform 0.2s ease;
+}
+
+a:hover {
+    transform: scale(1.05);
+    color: #ccc;
+}
+
+.header {
+    background-color: var(--azul-escuro);
+    color: var(--branco);
+    padding: 1em 2em;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.titulo {
+    display: flex;
+    align-items: center;
+}
+
+.logo {
+    background-color: var(--branco);
+    width: 3em;
+    height: 3em;
+    border-radius: 50%;
+    padding: .5em;
+    padding-left: .6em;
+    margin: .5em .5em;
+}
+
+h1 {
+    font-size: 2em;
+}
+
+.menu-lateral-btn {
+    display: flex;
+    gap: 10px;
+}
+
+.btn {
+    padding: 5px 10px;
+    background-color: var(--branco);
+    border: 1px solid var(--cinza-borda);
+    cursor: pointer;
+    text-transform: uppercase;
+    font-size: 12px;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.btn:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.pesquisa {
+    display: flex;
+    align-items: center;
+}
+
+.botao-lupa {
+    background-color: transparent;
+    border: none;
+}
+
+.lupa-pesquisa {
+    width: 22px;
+    margin-left: 10px;
+    margin-top: 8px;
+    transition: transform 0.2s ease;
+}
+
+.lupa-pesquisa:hover {
+    transform: scale(1.2);
+}
+
+.search-bar {
+    padding: 5px;
+    border: 1px solid var(--cinza-borda);
+    width: 150px;
+    background-color: transparent;
+    margin-top: .5em;
+    color: var(--branco);
+    font-size: 1em;
+    font-family: "Raleway", sans-serif;
+}
+
+/* -----------------------Conteúdo Principal -------------------------*/
+.principal {
+    display: flex;
+    flex: 1;
+}
+
+/* -------------------------Menu Lateral -------------------------*/
+/* Melhorias para o Menu Lateral */
+.menu-lateral {
+    background-color: var(--azul-escuro);
+    color: var(--branco);
+    padding: 15px;
+    max-width: 15%;
+    border-right: 1px solid var(--cinza-borda);
+    overflow-y: auto;
+    scrollbar-width: thin;
+    scrollbar-color: var(--azul) var(--azul-claro);
+}
+
+.menu-lateral::-webkit-scrollbar {
+    width: 6px;
+}
+
+.menu-lateral::-webkit-scrollbar-thumb {
+    background-color: var(--azul);
+    border-radius: 4px;
+}
+
+.menu-lateral h2 {
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 8px;
+    color: var(--cinza-texto);
+    font-weight: bold;
+}
+
+.menu-lateral-div {
+    padding: 10px;
+    display: flexbox;
+    background-color: rgba(255, 255, 255, 0.05);
+    border-radius: 8px;
+}
+
+.menu-lateral-div:not(:last-child) {
+    margin-bottom: 15px;
+}
+
+.menu-lateral-div label {
+    font-size: 13px;
+    color: var(--branco);
+    padding: 4px 0;
+}
+
+.menu-lateral-div input[type="checkbox"] {
+    margin-right: 8px;
+    accent-color: var(--azul);
+}
+
+.menu-lateral-div select {
+    background-color: var(--branco);
+    border: none;
+    border-radius: 4px;
+    padding: 6px;
+    font-size: 13px;
+}
+
+.menu-lateral-btn {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.menu-lateral-btn .btn {
+    background-color: var(--azul);
+    color: var(--branco);
+    border: none;
+    border-radius: 6px;
+    font-weight: bold;
+    letter-spacing: 0.5px;
+}
+
+.menu-lateral-btn .btn:hover {
+    background-color: var(--azul-escuro);
+}
+
+#btn-gerar-grafico {
+    width: 100%;
+    background-color: var(--azul);
+    color: var(--branco);
+    border: none;
+    border-radius: 6px;
+    padding: 8px;
+    font-weight: bold;
+    text-transform: uppercase;
+    transition: background-color 0.2s ease;
+}
+
+#btn-gerar-grafico:hover {
+    background-color: var(--azul-escuro);
+}
+
+/* Créditos */
+.creditos {
+    text-align: center;
+    font-size: 12px;
+    color: var(--cinza);
+}
+
+.creditos ul {
+    list-style: none;
+    padding: 0;
+    margin-top: 5px;
+}
+
+.creditos li {
+    margin: 2px 0;
+    font-size: 12px;
+    color: var(--branco);
+}
+
+
+/* ---------------------- Quadro de Tarefas ----------------------------*/
+
+.quadro-tarefas {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    padding: 20px;
+    max-height: 100%;
+
+}
+
+.lista-container {
+    background: var(--branco);
+    border: 1px solid var(--cinza-borda);
+    border-radius: 12px;
+    padding: 20px;
+    width: 300px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.lista-container:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+}
+
+.lista-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.nome-lista {
+    margin: 0;
+    font-size: 1.2em;
+}
+
+.icone-hamburguer img {
+    width: 24px;
+    height: 24px;
+    cursor: pointer;
+}
+
+.lista-actions {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+.lista-actions .btn {
+    flex: 1;
+    padding: 8px;
+    border: none;
+    border-radius: 4px;
+    background: #007bff;
+    color: white;
+    cursor: pointer;
+}
+
+.lista-actions .btn:hover {
+    background: #0056b3;
+}
+
+.tarefas-container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.tarefa {
+    display: flex;
+    border-left: 6px solid #2e8b57;
+    background-color: #e6ffed;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 16px;
+    background: var(--cinza);
+    border-radius: 8px;
+    font-size: 14px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.vencer {
+    border-left: 6px solid #4245f3;
+    background-color: #ccc;
+    color: rgb(0, 0, 0);
+}
+
+
+
+.tarefa:hover {
+    transform: scale(1.02);
+    background-color: #f0f0f0;
+}
+
+.tarefa input.checkbox {
+    width: 18px;
+    height: 18px;
+    accent-color: var(--azul);
+}
+
+.tarefa p {
+    margin: 0;
+    flex: 1;
+}
+
+/* -----------------pops--------------------- */
+#popup-editar-tarefa {
+    display: none;
+}
+
+.popup-container {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    justify-content: center;
+    align-items: center;
+    z-index: 999;
+}
+
+.popup {
+    background-color: var(--azul);
+    color: var(--branco);
+    border-radius: 16px;
+    padding: 30px;
+    width: 450px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    transform: scale(0.95);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.popup-content {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.popup-content label {
+    font-size: 14px;
+    margin-bottom: 5px;
+}
+
+.popup-content input,
+.popup-content textarea,
+.popup-content select {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid var(--cinza-borda);
+    border-radius: 8px;
+    font-size: 14px;
+    background-color: var(--branco);
+    color: var(--preto);
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.popup-content input:hover,
+.popup-content textarea:hover,
+.popup-content select:hover,
+.popup-content input:focus,
+.popup-content textarea:focus,
+.popup-content select:focus {
+    border-color: var(--azul);
+    box-shadow: 0 0 5px rgba(0, 48, 135, 0.5);
+    outline: none;
+}
+
+.popup-content textarea {
+    height: 100px;
+    resize: none;
+}
+
+.row {
+    display: flex;
+    gap: 10px;
+}
+
+.field {
+    flex: 1;
+}
+
+.popup-actions {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+.btnpop {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 20px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.btnpop:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.criar {
+    background-color: #00cc00;
+    color: #fff;
+}
+.editar {
+    background-color: #00cc00;
+    color: #fff;
+}
+
+.excluir {
+    background-color: #cc0000;
+    color: #fff;
+}
+
+.cancelar {
+    background-color: #ff6600;
+    color: #fff;
+}
+
+/* --------- Estilos para Prioridade das Tarefas --------- */
+
+.expirada {
+    border-left: 6px solid #d9f342;
+    background-color: var(--vermelho-intenso);
+    color: white;
+}
+
+.alta-prioridade {
+    border-left: 6px solid #fffb00;
+    background-color: #e4df9e;
+}
+
+.moderada-prioridade {
+    border-left: 6px solid #ffa500;
+    background-color: #fff3e0;
+}
+
+.leve-prioridade {
+    border-left: 6px solid #2e8b57;
+    background-color: #e6ffed;
+}
+
+
+/* --------------------------------efeitos----------------------------- */
+
+.btn,
+.btnpop {
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.btn:hover,
+.btnpop:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.lista-container {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.lista-container:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+}
+
+.tarefa {
+    transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.tarefa:hover {
+    transform: scale(1.02);
+    background-color: #f0f0f0;
+}
+
+a {
+    transition: color 0.2s ease, transform 0.2s ease;
+}
+
+a:hover {
+    transform: scale(1.05);
+    color: #ccc;
+}
+
+.lupa-pesquisa {
+    transition: transform 0.2s ease;
+}
+
+.lupa-pesquisa:hover {
+    transform: scale(1.2);
+}
+
+.popup {
+    transform: scale(0.95);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.btnpop {
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.btnpop:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+
+.popup-content input,
+.popup-content textarea,
+.popup-content select {
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.popup-content input:hover,
+.popup-content textarea:hover,
+.popup-content select:hover {
+    border-color: #003087;
+    box-shadow: 0 0 5px rgba(0, 48, 135, 0.5);
+    outline: none;
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+    outline: none;
+    border-color: var(--azul);
+    box-shadow: 0 0 8px rgba(57, 91, 158, 0.4);
+}
+
+
+/* tarefas a vencer */
+.botao-flutuante-alerta {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: #d33c3c;
+    color: white;
+    font-weight: bolder;
+    padding: 12px 18px;
+    border-radius: 50px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+
+/* subtarefas */
+.subtarefa {
+    padding: 8px;
+    margin: 8px 0;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.subtarefa-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.checkbox-sub {
+    width: 18px;
+    height: 18px;
+    margin-right: 10px;
+    accent-color: #4CAF50;
+    /* Cor verde para o check */
+}
+
+.subtarefa-text {
+    flex: 1;
+    margin: 0;
+    font-size: 16px;
+    color: #333;
+}
+
+.btn-remover-subtarefa {
+    background-color: #ff4d4d;
+    color: white;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.btn-remover-subtarefa:hover {
+    background-color: #e60000;
+}
+
+/* Estilo geral do popup */
+.popup-content-subtarefas {
+    max-height: 300px;
+    overflow-y: auto;
+    padding: 16px;
+    background-color: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    width: 100%;
+    max-width: 400px;
+    margin: 0 auto;
+    box-sizing: border-box;
+}
+
+/* Estilo de cada subtarefa */
+.subtarefa {
+    padding: 8px 12px;
+    margin-bottom: 10px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    transition: background-color 0.3s;
+}
+
+.subtarefa:hover {
+    background-color: #f0f0f0;
+}
+
+/* Layout flex para alinhar itens da subtarefa */
+.subtarefa-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    margin: 2px;
+}
+
+/* Checkbox estilizado */
+.checkbox-sub {
+    width: 18px;
+    height: 18px;
+    accent-color: #4CAF50;
+    /* Verde */
+    cursor: pointer;
+}
+
+/* Texto da subtarefa */
+.subtarefa-text {
+    flex: 1;
+    font-size: 16px;
+    color: #333;
+    margin: 0;
+    word-break: break-word;
+}
+
+.texto {
+    width: 80%;
+    color: #000000;
+}
+
+/* Botão remover */
+.btn-remover-subtarefa {
+    background-color: #ff4d4d;
+    color: white;
+    margin: auto 2px 0;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.3s;
+}
+
+.btn-remover-subtarefa:hover {
+    background-color: #e60000;
+}
+
+/* gráfico */
+
+/* Popup Relatórios e Estatísticas */
+
+#popup-relatorios.popup-container {
+    display: flex;
+    /* para alinhar centralizado */
+    backdrop-filter: blur(4px);
+
+}
+
+#popup-relatorios .popup {
+    background-color: var(--azul-escuro);
+    color: var(--branco);
+    border-radius: 16px;
+    padding: 25px 30px;
+    width: 480px;
+    max-width: 95vw;
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.5);
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    transform: scale(1);
+    transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+#popup-relatorios h2 {
+    font-size: 1.8rem;
+    margin-bottom: 10px;
+    border-bottom: 2px solid var(--azul);
+    padding-bottom: 6px;
+    font-weight: 700;
+}
+
+.estatisticas p {
+    font-size: 1rem;
+    line-height: 1.4;
+    margin-bottom: 8px;
+    color: var(--cinza-claro, #dcdcdc);
+}
+
+.estatisticas strong {
+    color: var(--azul-claro);
+}
+
+.estatisticas span {
+    float: right;
+    font-weight: 600;
+    color: var(--branco);
+}
+
+/* Gráficos */
+
+.graficos {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.graficos h3 {
+    font-size: 1.3rem;
+    border-bottom: 1px solid var(--azul);
+    padding-bottom: 6px;
+    margin-bottom: 12px;
+    color: var(--azul-claro);
+}
+
+/* Gráfico de barras */
+
+.grafico-barras {
+    background-color: var(--azul);
+    border-radius: 12px;
+    padding: 15px;
+    box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.3);
+}
+
+.grafico-barras h4 {
+    font-size: 1.1rem;
+    margin-bottom: 12px;
+    color: var(--azul-claro);
+}
+
+.barra {
+    position: relative;
+    height: 28px;
+    border-radius: 12px;
+    margin-bottom: 10px;
+    background-color: var(--cinza-borda);
+    overflow: hidden;
+    color: var(--branco);
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    padding-left: 12px;
+    user-select: none;
+}
+
+.barra span {
+    position: relative;
+    z-index: 2;
+}
+
+.barra::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: var(--valor, 0%);
+    border-radius: 12px;
+    z-index: 1;
+    transition: width 0.5s ease;
+}
+
+.barra.total::before {
+    background: linear-gradient(90deg, #4a90e2, #357ABD);
+}
+
+.barra.concluidas::before {
+    background: linear-gradient(90deg, #28a745, #1e7e34);
+}
+
+.barra.pendentes::before {
+    background: linear-gradient(90deg, #ffc107, #cc9a06);
+}
+
+/* Gráfico pizza */
+
+.grafico-pizza {
+    background-color: var(--azul);
+    border-radius: 12px;
+    padding: 15px;
+    box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.3);
+}
+
+.grafico-pizza h4 {
+    font-size: 1.1rem;
+    margin-bottom: 12px;
+    color: var(--azul-claro);
+}
+
+.pizza {
+    position: relative;
+    width: 160px;
+    height: 160px;
+    border-radius: 50%;
+    margin: 0 auto;
+    background: conic-gradient(#28a745 0% 50%,
+            #ffc107 50% 100%);
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.3);
+}
+
+/* Popup actions */
+
+.popup-actions {
+    display: flex;
+    gap: 15px;
+    margin-top: 10px;
+}
+
+.popup-actions .btn {
+    min-width: 100px;
+    padding: 10px 16px;
+    font-size: 14px;
+    font-weight: 700;
+    border-radius: 25px;
+    border: none;
+    cursor: pointer;
+    color: var(--branco);
+    transition: background-color 0.3s ease, box-shadow 0.3s ease, transform 0.2s ease;
+}
+
+.popup-actions .btn.cancelar {
+    background-color: var(--vermelho-intenso);
+}
+
+.popup-actions .btn.cancelar:hover {
+    background-color: #b02a37;
+    box-shadow: 0 0 12px var(--vermelho-intenso);
+    transform: scale(1.05);
+}
+
+/* Responsividade */
+
+@media (max-width: 550px) {
+    #popup-relatorios .popup {
+        width: 90vw;
+        padding: 20px;
+    }
+
+    .estatisticas p {
+        font-size: 0.9rem;
+    }
+
+    .grafico-barras,
+    .grafico-pizza {
+        padding: 12px;
+    }
+
+    .pizza {
+        width: 120px;
+        height: 120px;
+    }
+}
+
+/* ////// */
+
+
+
+/*  Tablet  */
+@media (max-width: 850px) and (min-width: 381px) {
+    .header {
+        flex-direction: column;
+        gap: 10px;
+        align-items: flex-start;
+    }
+
+    .menu-lateral {
+        width: 100%;
+        max-height: 100%;
+        border-right: none;
+        border-bottom: 1px solid var(--cinza-borda);
+    }
+
+    .principal {
+        flex-direction: column;
+    }
+
+    .quadro-tarefas {
+        justify-content: center;
+    }
+
+    .lista-container {
+        width: 90%;
+        max-width: 500px;
+    }
+
+    .popup {
+        width: 90%;
+    }
+
+    .search-bar {
+        width: 100%;
+    }
+}
+
+/*  Smartphone  */
+@media (max-width: 380px) {
+    .header {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 1em;
+    }
+
+    h1 {
+        font-size: 1.5em;
+    }
+
+    .menu-lateral {
+        width: 100%;
+        padding: 5px;
+        font-size: 14px;
+    }
+
+    .btn,
+    .btnpop {
+        font-size: 12px;
+        padding: 6px 12px;
+    }
+
+    .quadro-tarefas {
+        flex-direction: column;
+        align-items: center;
+        padding: 10px;
+    }
+
+    .lista-container {
+        width: 100%;
+        padding: 15px;
+    }
+
+    .popup {
+        width: 90%;
+        padding: 20px;
+    }
+
+    .popup-content input,
+    .popup-content textarea,
+    .popup-content select {
+        font-size: 12px;
+        padding: 10px;
+    }
+
+    .icone-hamburguer img {
+        width: 20px;
+        height: 20px;
+    }
+
+    .search-bar {
+        width: 100%;
+        font-size: 0.9em;
+    }
+
+    .lupa-pesquisa {
+        width: 18px;
+    }
+
+    .lista-actions .btn {
+        font-size: 11px;
+        padding: 6px;
+    }
+
+    .tarefa {
+        font-size: 12px;
+        padding: 10px;
+    }
+}

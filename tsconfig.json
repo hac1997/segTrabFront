@@ -1,0 +1,26 @@
+{
+  "compilerOptions": {
+    "target": "ES2017", // Compila para JavaScript ES2017
+    "module": "ES6", // Usa módulos ES6 (import/export)
+    "rootDir": "./src", // Pasta raiz dos arquivos TS
+    "outDir": "./dist", // Pasta de saída do JS compilado
+    "strict": true, // Ativa todas as checagens estritas
+    "esModuleInterop": true, // Compatibilidade com módulos CommonJS
+    "forceConsistentCasingInFileNames": true, // Sensibilidade a maiúsculas/minúsculas
+    "skipLibCheck": true, // Ignora checagem de libs para acelerar compilação
+    "moduleResolution": "node", // Resolve módulos no estilo node.js
+    "sourceMap": false, // Gera arquivos .map para debugging
+    "noImplicitAny": true, // Proíbe o uso implícito do any
+    "noUnusedLocals": true, // Erro para variáveis locais não usadas
+    "noUnusedParameters": true // Erro para parâmetros não usados
+  },
+  
+  "include": [
+    "src/**/*"
+  ], // Inclui todos os arquivos na pasta src
+
+  "exclude": [
+    "node_modules",
+    "dist"
+  ] // Exclui estas pastas
+}

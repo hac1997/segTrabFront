@@ -1,0 +1,39 @@
+// //estrutura de uma tarefa:
+
+// // os ids são gerados assim:
+// // export function gerarIdUnico() {
+// //     return Date.now().toString(36) + Math.random().toString(36).substr(2);
+// // }
+
+// const tarefa = {
+//     id: "",
+//     nome: "",
+//     descricao: "",
+//     prioridade: "",//Alta, Moderada ou Leve
+//     listaId: "",
+//     data: "", // dd/mm/aaaa
+//     hora: "", // hh:mm
+//     dataConclusao: "",// dd/mm/aaaa
+//     horaConclusao: "", // hh:mm
+//     concluida: "", //true ou false sem aspas
+//     autoconcluir: "", //true ou false sem aspas
+// }
+
+// const subtarefa = {
+//     descricao: "",
+//     checkbox: "",
+//     id: "",
+//     idTarefaMae: ""
+// }
+
+
+// //uma lista tem um nome e um array com os ids das tarefas
+
+// const lista = {
+//     id: "",
+//     nome: "",
+//     tarefas: ["", ""],
+//     tipoOrdenacao: "", // ord-prioridade, ord-Nome, ord-data-conclusao ou ord-nenhuma
+//     ordemOrdenacao: "" //ord-asc ou ord-desc
+
+// }

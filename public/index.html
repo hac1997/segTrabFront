@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TaskHub</title>
+  <link rel="stylesheet" href="/public/styles.css">
+  <link rel="icon" href="/public/img/lista.png">
+  <script src="/dist/main.js" type="module" defer></script>
+
+</head>
+
+<body>
+  <div class="container">
+
+    <header class="header">
+      <a class="titulo" href="#">
+        <div class="logo">
+          <img src="/public/img/lista.png" alt="logo">
+        </div>
+        <h1>TaskHub</h1>
+      </a>
+
+      <div class="pesquisa" role="search">
+        <input type="text" placeholder="buscar tarefa" class="search-bar" id="string-busca" aria-label="Buscar tarefa">
+        <button class="botao-lupa" id="btn-abrir-buscar" aria-label="Buscar">
+          <img class="lupa-pesquisa" src="/public/img/pesquisa-de-lupa.png" alt="ícone de lupa">
+        </button>
+      </div>
+    </header>
+
+    <main class="principal">
+      <nav class="menu-lateral" aria-label="Menu lateral" style="height: auto;">
+        <section class="menu-lateral-div" aria-labelledby="acoes">
+          <h2 id="acoes" class="visually-hidden">Ações</h2>
+          <div class="menu-lateral-btn">
+            <button class="btn" id="btn-abrir-pop-criar-lista-menu">Criar Lista</button>
+            <button class="btn" id="btn-abrir-pop-criar-tarefa-menu">Criar Tarefa</button>
+
+          </div>
+        </section>
+        <section>
+          <h2>gráfico</h2>
+          <br>
+          <button class="btn" id="btn-gerar-grafico">gerar gráfico</button>
+
+        </section>
+        <section class="menu-lateral-div" aria-labelledby="filtrar-listas">
+          <br>
+          <h2 id="filtrar-listas">Filtrar listas</h2>
+          <div id="filtro-listas" class="dropdown-checkboxes">
+          </div>
+        </section>
+
+        <section class="menu-lateral-div" aria-labelledby="filtros-rapidos">
+          <h2 id="filtros-rapidos">Filtros Rápidos</h2>
+          <label><input type="checkbox" name="pendente"> Pendente</label>
+          <br>
+          <label><input type="checkbox" name="concluida"> Concluído</label>
+          <br>
+          <label><input type="checkbox" name="vencido"> Vencido</label>
+          <br>
+          <label><input type="checkbox" name="Prioridade Baixa"> Prioridade Baixa</label>
+          <br>
+          <label><input type="checkbox" name="Prioridade média"> Prioridade Moderada</label>
+          <br>
+          <label><input type="checkbox" name="Prioridade alta"> Prioridade Alta</label>
+        </section>
+
+        <section class="menu-lateral-div" aria-labelledby="ordenar">
+          <h2 id="ordenar">Ordenar por:</h2>
+          <select id="ordenar-data" name="ordenar por Data">
+            <option value="" disabled selected>Data</option>
+            <option value="ordenar-data-vazio">Não ordenar</option>
+            <option value="Recente">Mais Recente</option>
+            <option value="mais-antigo">Mais Antigo</option>
+          </select>
+          <br>
+          <br>
+          <select id="ordenar-prioridade" name="ordenar por Prioridade">
+            <option value="" disabled selected>Prioridade</option>
+            <option value="ordenar-prioridade-vazio">Não ordenar</option>
+            <option value="maior-prioridade">Maior prioridade</option>
+            <option value="menor-prioridade">Menor prioridade</option>
+          </select>
+          <br>
+          <br>
+          <select id="ordenar-desc" name="ordenar por Descrição">
+            <option value="" disabled selected>Descrição</option>
+            <option value="ordenar-desc-vazio">Não ordenar</option>
+            <option value="desc-alfabetico">em ordem alfabética</option>
+            <option value="desc-inv-alfabetico">em ordem inversa alfabética</option>
+          </select>
+        </section>
+
+        <section class="menu-lateral-div" aria-labelledby="criadores">
+          <div class="creditos">
+            <h2 id="criadores">© 2025 TaskHub. Powered and scured by</h2>
+            <ul>
+              <li>Herick</li>
+              <li>Guessser</li>
+              <li>Vinicius</li>
+            </ul>
+          </div>
+        </section>
+      </nav>
+
+      <section class="quadro-tarefas" aria-label="Quadro de Tarefas">
+      </section>
+    </main>
+  </div>
+
+  <!-- Popups -->
+  <!-- Popups -->
+
+  <!-- Popup: Criar nova lista -->
+  <dialog class="popup-container" id="popup-criar-lista-menu">
+    <form class="popup">
+      <div class="popup-content">
+        <label for="nome-lista">Escreva o nome da Nova Lista:</label>
+        <input type="text" id="nome-lista" placeholder="Nome da Lista" required>
+        <div class="popup-actions">
+          <button type="submit" class="btnpop criar" id="btn-popup-lista-menu-criar">Criar</button>
+          <button type="button" class="btnpop cancelar" id="btn-popup-lista-menu-cancelar">Cancelar</button>
+        </div>
+      </div>
+    </form>
+  </dialog>
+
+  <!-- Popup: Criar nova tarefa -->
+  <dialog class="popup-container" id="popup-criar-tarefa-menu">
+    <form class="popup">
+      <div class="popup-content">
+        <label for="nome-tarefa-menu">Nome da Tarefa</label>
+        <input type="text" id="nome-tarefa-menu" required>
+
+        <label for="descricao-tarefa-menu">Descrição</label>
+        <textarea id="descricao-tarefa-menu" required></textarea>
+
+        <div class="row">
+          <div class="field">
+            <label for="prioridade-tarefa-menu">Prioridade</label>
+            <select id="prioridade-tarefa-menu" required>
+              <option value="" disabled selected>Selecione</option>
+              <option value="Alta">Alta</option>
+              <option value="Moderada">Moderada</option>
+              <option value="Leve">Leve</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="lista-criar-tarefa-menu">Lista</label>
+            <select id="lista-criar-tarefa-menu" required>
+              <option value="" disabled selected>Selecione</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="field">
+            <label for="data-tarefa-menu">Data</label>
+            <input type="text" id="data-tarefa-menu" placeholder="DD/MM/AAAA" required>
+          </div>
+          <div class="field">
+            <label for="hora-tarefa-menu">Hora</label>
+            <input type="text" id="hora-tarefa-menu" placeholder="HH:MM" required>
+          </div>
+        </div>
+
+        <div class="popup-actions">
+          <button type="submit" class="btnpop criar" id="btn-criar-tarefa-menu-salvar">Criar</button>
+          <button type="button" class="btnpop cancelar" id="btn-criar-tarefa-menu-cancelar">Cancelar</button>
+        </div>
+      </div>
+    </form>
+  </dialog>
+
+  <!-- Popup: Editar ou excluir uma tarefa existente -->
+  <dialog class="popup-container" id="popup-editar-tarefa">
+    <form class="popup" id="popup-com-subs">
+      <div class="popup-content">
+        <label for="nome-tarefa">Nome da Tarefa</label>
+        <input type="text" id="nome-tarefa" required>
+
+        <textarea id="id-tarefa-editar" style="display: none;"></textarea>
+
+        <label for="descricao-editar">Descrição</label>
+        <textarea id="descricao-editar" required></textarea>
+
+
+        <div style="display: none;">
+          <input type="text" id="id-tarefa">
+        </div>
+
+        <div class="row">
+          <div class="field">
+            <label for="prioridade">Prioridade</label>
+            <select id="prioridade" required>
+              <option value="" disabled selected>Selecione</option>
+              <option value="Alta">Alta</option>
+              <option value="Moderada">Moderada</option>
+              <option value="Leve">Leve</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="lista-editar-tarefa-menu">Lista</label>
+            <select id="lista-editar-tarefa-menu">
+            </select>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="field">
+            <label for="data">Data</label>
+            <input type="text" id="data" placeholder="DD/MM/AAAA" required>
+          </div>
+          <div class="field">
+            <label for="hora">Hora</label>
+            <input type="text" id="hora" placeholder="HH:MM" required>
+          </div>
+        </div>
+
+        <div class="row" id="subtarefas">
+          <input type="text" id="subtarefa-descricao">
+          <button type="button" class="btn" id="btn-add-subtarefa" style="margin-left: auto;">Adicionar
+            Subtarefa</button>
+        </div>
+
+
+
+
+        <div class="popup-actions">
+          <button type="submit" class="btn criar" id="btn-popup-editar-tarefa-editar">Editar</button>
+          <button type="button" class="btn excluir" id="btn-popup-editar-tarefa-excluir">Excluir</button>
+          <button type="button" class="btn cancelar" id="btn-popup-editar-tarefa-sair">Sair</button>
+        </div>
+
+        <div class="popup-actions">
+          <input type="checkbox" id="auto-concluir-tarefa" style="width: auto;">
+          <label for="auto-concluir-tarefa" style="width: 80%; font-size: 1em;">Concluir a tarefa quando todas as
+            subtarefas forem concluídas</label>
+        </div>
+
+
+      </div>
+
+      <br>
+      <div class="popup-content-subtarefas" id="lista-subtarefas">
+
+      </div>
+    </form>
+
+  </dialog>
+
+  <!-- Popup: Editar ou excluir uma lista existente -->
+  <dialog class="popup-container" id="popup-editar-lista">
+    <form class="popup">
+      <div class="popup-content">
+        <input type="text" id="nome-lista-editar" placeholder="Nome da Lista">
+        <input type="text" id="id-lista-editar" placeholder="id para fins de eventlisteners" style="display: none;">
+
+
+        <!-- Seção de Ordenação -->
+        <div class="ordenacao-container">
+          <h3>Ordenar Tarefas</h3>
+          <label for="tipo-ordenacao">Ordenar por:</label>
+
+          <select id="tipo-ordenacao">
+            <option value="ord-prioridade">Prioridade</option>
+            <option value="ord-Nome">Nome</option>
+            <option value="ord-data-conclusao">Data de Conclusão</option>
+            <option value="ord-nenhuma">Não ordenar</option>
+          </select>
+
+          <label for="direcao-ordenacao">Ordem:</label>
+          <select id="direcao-ordenacao">
+            <option value="ord-asc">Crescente</option>
+            <option value="ord-desc">Decrescente</option>
+          </select>
+
+          <br>
+          <br>
+        </div>
+
+        <div class="popup-actions">
+          <button type="submit" class="btn editar" id="btn-editar-lista">Editar</button>
+          <button type="button" class="btn excluir" id="btn-excluir-lista">Excluir</button>
+          <button type="button" class="btn cancelar" id="btn-cancelar-editar-lista">Cancelar</button>
+        </div>
+      </div>
+    </form>
+  </dialog>
+
+  <!-- Popup: Relatórios e Estatísticas -->
+  <dialog class="popup-container" id="popup-relatorios" style="display: none;">
+    <form class="popup">
+      <div class="popup-content" style="flex-wrap: wrap;">
+        <h2>Relatórios e Estatísticas</h2>
+
+        <div class="estatisticas">
+          <p><strong>Total de Tarefas Criadas:</strong> <span id="total-tarefas">0</span></p>
+          <p><strong>Total de Tarefas Concluídas:</strong> <span id="total-concluidas">0</span></p>
+          <p><strong>Total de Tarefas Pendentes:</strong> <span id="total-pendentes">0</span></p>
+          <p><strong>Média de Conclusões por Dia:</strong> <span id="media-dia">0</span></p>
+          <p><strong>Média de Conclusões por Semana:</strong> <span id="media-semana">0</span></p>
+          <p><strong>Média de Conclusões por Mês:</strong> <span id="media-mes">0</span></p>
+        </div>
+
+        <div>
+          <div class="graficos">
+            <h3>Gráficos</h3>
+            <div class="grafico-barras">
+              <h4>Barras: Tarefas Criadas/Concluídas</h4>
+              <div class="barra total" style="--valor: 100%;">
+                <span>Total</span>
+              </div>
+              <div class="barra concluidas" style="--valor: 50%;">
+                <span>Concluídas</span>
+              </div>
+              <div class="barra pendentes" style="--valor: 50%;">
+                <span>Pendentes</span>
+              </div>
+            </div>
+
+            <div class="grafico-pizza">
+              <h4>Pizza: Tarefas</h4>
+              <div class="pizza">
+                <div class="fatias"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+
+        <div class="popup-actions">
+          <button type="button" class="btn cancelar" id="btn-fechar-relatorios">Fechar</button>
+        </div>
+      </div>
+    </form>
+  </dialog>
+
+
+  <!-- Popup: Buscar tarefa (visualização de resultados da busca) -->
+  <dialog class="popup-container" id="popup-buscar-tarefa">
+    <div class="popup">
+      <button class="btn cancelar" id="btn-sair-buscar">Sair</button>
+      <div class="popup-content" id="tarefas-buscar"></div>
+    </div>
+  </dialog>
+
+  <!-- tarefas a vencer -->
+
+  <button class="botao-flutuante-alerta" id="botao-flutuante-alerta" style="display: none;">Alerta! tarefas a
+    vencer!</button>
+
+
+  <dialog class="popup-container" id="popup-tarefas-vencer">
+    <div class="popup">
+      <button class="btn cancelar" id="btn-sair-tarefas-atrasadas">Sair</button>
+      <div class="popup-content" id="tarefas-a-vencer"></div>
+    </div>
+  </dialog>
+
+
+</body>
+
+</html>
