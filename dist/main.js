@@ -204,3 +204,4 @@ function main() {
     };
 }
 document.addEventListener('DOMContentLoaded', () => main());
+//# sourceMappingURL=main.js.map

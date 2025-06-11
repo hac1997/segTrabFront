@@ -36,7 +36,6 @@ export function gerarEventListenersSubtarefa(subtarefaDiv: HTMLDivElement, subta
     });
 
     const btnRemoverSubtarefa = subtarefaDiv.querySelector(".btn-remover-subtarefa") as HTMLButtonElement;
-
     btnRemoverSubtarefa.addEventListener("click", () => {
         todasSubtarefas = todasSubtarefas.filter((s) => s.id !== subtarefa.id);
         salvarSubtarefas(todasSubtarefas);

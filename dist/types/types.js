@@ -35,3 +35,4 @@ export function construirSubtarefa(descricao, idTarefaMae) {
     };
     return subtarefaSaida;
 }
+//# sourceMappingURL=types.js.map

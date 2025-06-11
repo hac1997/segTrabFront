@@ -47,3 +47,4 @@ export function togglePopEditarLista(liga) {
         elemento.style.display = liga ? "flex" : "none";
     }
 }
+//# sourceMappingURL=uiPop.js.map

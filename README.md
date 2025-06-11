@@ -1,5 +1,186 @@
 # Projeto TaskHub
 
+classDiagram
+    direction TB
+
+    class Lista {
+        +id: string
+        +nome: string
+        +tarefas: string[]
+        +tipoOrdenacao: string
+        +ordemOrdenacao: string
+        +construirLista(id, nome): Lista
+    }
+
+    class Tarefa {
+        +id: string
+        +nome: string
+        +descricao: string
+        +prioridade: Prioridade
+        +listaId: string
+        +data: string
+        +hora: string
+        +dataConclusao: string
+        +horaConclusao: string
+        +concluida: boolean
+        +autoconcluir: boolean
+        +construirTarefa(id, nome, desc, prio, listId, data, hora): Tarefa
+    }
+
+    class Subtarefa {
+        +id: string
+        +descricao: string
+        +concluida: boolean
+        +idTarefaMae: string
+        +construirSubtarefa(desc, idTarefaMae): Subtarefa
+    }
+
+    class Prioridade << (E,green) >> {
+        Alta
+        Moderada
+        Leve
+    }
+
+    class ListaComponents {
+        +criarListaContainer(lista: Lista): HTMLDivElement[]
+        +abrirPopupEditarLista(listaId: string)
+    }
+
+    class SubtarefaComponents {
+        +criarSubtarefaDiv(subtarefa: Subtarefa): HTMLDivElement
+        +gerarEventListenersSubtarefa(subtarefaDiv, subtarefa, todasSubtarefas, tarefa)
+    }
+
+    class TarefaComponents {
+        +criarTarefaDiv(tarefa: Tarefa): HTMLDivElement
+        +criarElementoTarefa(tarefa: Tarefa)
+    }
+
+    class TaskManagement {
+        +atualizarStatusTarefa(tarefaId: string, concluida: boolean)
+        +atualizarCheckboxSubtarefas(tarefaId: string)
+        +abrirPopCriarTarefa()
+    }
+
+    class UI {
+        +construirOpcoesSelectListas(divLista: HTMLDivElement)
+        +criarOpcaoLista(listaId: string, listaNome: string): HTMLOptionElement
+        +carregarValoresPopEditarTarefa(lista: Lista)
+        +preencherCamposEditarTarefa(tarefa: Tarefa)
+        +esvaziarCamposCriarTarefaMenu()
+        +carregarSubTarefas(tarefa: Tarefa, subdiv: HTMLDivElement)
+        +carregarTarefasAVencer(tarefas: Tarefa[], divContainer: HTMLDivElement)
+        +carregarTarefas(tarefas: Tarefa[], divContainer: HTMLDivElement)
+        +abrirPopupEditarTarefa(tarefaId: string)
+        +carregarListas(listas: Lista[], div: HTMLDivElement)
+        +atualizarRelatorios()
+        +atualizarCamposRelatorios(total, concluidas, pendentes, mediaDia, mediaSemana, mediaMes)
+        +preencherGraficoPizza(percConcluidas, percPendentes)
+    }
+
+    class UIPopup {
+        +togglePopCriarListaMenu(liga: boolean)
+        +togglePopCriarTarefaMenu(liga: boolean)
+        +togglePopBuscaJanela(liga: boolean)
+        +toggleBotaoAlertaTarefaAVencer(liga: boolean)
+        +togglePopTarefasAVencer(liga: boolean)
+        +togglePopRelatorio(liga: boolean)
+        +togglePopEditarTareda(liga: boolean)
+        +togglePopEditarLista(liga: boolean)
+    }
+
+    class StorageUtils {
+        +puxarTarefas(): Tarefa[]
+        +puxarListas(): Lista[]
+        +puxarSubtarefas(): Subtarefa[]
+        +puxarCheckedFiltroStatus()
+        +puxarCheckedFiltroPrioridade()
+        +puxarTarefasVencer(dias: number): Tarefa[]
+        +excluirLista(listaId: string)
+        +excluirTarefa(tarefaId: string)
+        +salvarSubtarefas(subtarefas: Subtarefa[])
+        +salvarSubtarefa(tarefa: Tarefa, descricao: string)
+        +salvarTarefa(idTarefa, nome, desc, prio, listId, data, hora)
+        +salvarLista(nomeLista: string)
+        +media(array: number[])
+        +gerarIdUnico(): string
+        +calcularTarefasConcluidas(): number
+        +calcularTarefasPendentes(): number
+        +calcularTarefasTotal(): number
+    }
+
+    class DataTimeUtils {
+        +tempoRestanteParaVencer(tarefa: Tarefa): string
+        +formatarData(data: Date): string
+        +formatarHora(data: Date): string
+        +parseData(dataString: string): number[]
+        +parseDataHora(dataStr: string, horaStr: string): Date
+        +parseDataBrasil(dataStr: string): Date | null
+        +getAnoSemana(data: Date): string
+        +validaData(dataString: string): boolean
+        +validaHora(horaString: string): boolean
+        +dataExpirada(data: string, hora: string): boolean
+    }
+
+    class FilterSortUtils {
+        +ehVencida(tarefa: Tarefa): boolean
+        +ehConcluida(tarefa: Tarefa): boolean
+        +ehPendente(tarefa: Tarefa): boolean
+        +filtrarTarefas(tarefas, filtroStatus, filtroPrioridade)
+        +filtroOrdenarDescricao(tarefaFiltrada)
+        +filtroOrdenarPrioridade(tarefaFiltrada)
+        +filtroOrdernarTempo(tarefaFiltrada)
+        +ordenarTarefas(tarefas, tipoOrdenacao, ordemOrdenacao)
+    }
+
+    Lista "1" *-- "0..*" Tarefa : contém
+    Tarefa "1" *-- "0..*" Subtarefa : contém
+    Tarefa --> Prioridade : tem
+
+    ListaComponents ..> Lista
+    ListaComponents ..> StorageUtils : puxarListas
+    ListaComponents ..> UI : carregarValoresPopEditarTarefa
+    ListaComponents ..> UIPopup : togglePopEditarLista
+
+    SubtarefaComponents ..> Subtarefa
+    SubtarefaComponents ..> StorageUtils : salvarSubtarefas
+    SubtarefaComponents ..> TaskManagement : atualizarStatusTarefa
+    SubtarefaComponents ..> FilterSortUtils : confereCheckbox
+
+    TarefaComponents ..> Tarefa
+    TarefaComponents ..> DataTimeUtils : tempoRestanteParaVencer
+    TarefaComponents ..> DataTimeUtils : dataExpirada
+
+    TaskManagement ..> Tarefa
+    TaskManagement ..> Subtarefa
+    TaskManagement ..> StorageUtils : puxarTarefas, puxarSubtarefas
+    TaskManagement ..> UI : construirOpcoesSelectListas, esvaziarCamposCriarTarefaMenu
+    TaskManagement ..> UIPopup : togglePopCriarTarefaMenu
+
+    UI ..> Lista
+    UI ..> Tarefa
+    UI ..> Subtarefa
+    UI ..> ListaComponents
+    UI ..> SubtarefaComponents
+    UI ..> TarefaComponents
+    UI ..> TaskManagement
+    UI ..> StorageUtils : puxarListas, puxarTarefas, puxarSubtarefas, puxarCheckedFiltroPrioridade, puxarCheckedFiltroStatus
+    UI ..> DataTimeUtils : parseDataBrasil, getAnoSemana
+    UI ..> FilterSortUtils
+    UI ..> UIPopup
+
+    StorageUtils ..> Lista
+    StorageUtils ..> Tarefa
+    StorageUtils ..> Subtarefa
+    StorageUtils ..> DataTimeUtils : validaData, validaHora
+    StorageUtils ..> FilterSortUtils : ehVencida
+
+    DataTimeUtils ..> Tarefa
+
+    FilterSortUtils ..> Tarefa
+    FilterSortUtils ..> DataTimeUtils : dataExpirada
+    FilterSortUtils ..> StorageUtils : puxarCheckedFiltroPrioridade, puxarCheckedFiltroStatus
+
 ## Descrição do Projeto: 
 
 O projeto se trata de um sistema gerenciador de tarefas, planejado para organizar as atividades da rotida.

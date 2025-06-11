@@ -138,3 +138,4 @@ export function calcularTarefasPendentes() {
 export function calcularTarefasTotal() {
     return calcularTarefasConcluidas() + calcularTarefasPendentes();
 }
+//# sourceMappingURL=utils.js.map

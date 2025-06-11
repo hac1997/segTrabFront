@@ -35,3 +35,4 @@ export function gerarEventListenersSubtarefa(subtarefaDiv, subtarefa, todasSubta
         subtarefaDiv.remove();
     });
 }
+//# sourceMappingURL=subtarefa.js.map

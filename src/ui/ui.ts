@@ -56,7 +56,6 @@ export function esvaziarCamposCriarTarefaMenu(): void {
     (document.getElementById('data-tarefa-menu') as HTMLInputElement).value = '';
     (document.getElementById('hora-tarefa-menu') as HTMLInputElement).value = '';
 }
-//carregar elementos html
 
 export function carregarSubTarefas(tarefa: Tarefa, subdiv: HTMLDivElement) {
     subdiv.innerHTML = "";
@@ -78,18 +77,12 @@ export function carregarTarefasAVencer(tarefas: Tarefa[], divContainer: HTMLDivE
     tarefas.forEach(tarefa => {
         const tarefaDiv = criarTarefaDiv(tarefa)
         const checkbox = tarefaDiv.querySelector('.checkbox') as HTMLInputElement;
-        checkbox.addEventListener('change', () => {
-            atualizarStatusTarefa(tarefa.id, checkbox.checked);
-        });
-
+        checkbox.addEventListener('change', () => { atualizarStatusTarefa(tarefa.id, checkbox.checked); });
         tarefaDiv.addEventListener('click', (event) => {
             const target = event.target as HTMLElement | null;
             if (target?.classList.contains('checkbox')) return;
-
             const selectLista = document.getElementById('lista-editar-tarefa-menu') as HTMLDivElement | null;
-            if (selectLista) {
-                construirOpcoesSelectListas(selectLista);
-            }
+            if (selectLista) { construirOpcoesSelectListas(selectLista); }
             abrirPopupEditarTarefa(tarefa.id);
             togglePopTarefasAVencer(false);
         });
@@ -101,7 +94,6 @@ export function carregarTarefas(tarefas: Tarefa[], divContainer: HTMLDivElement)
     const elementosTarefas = tarefas
         .map(criarElementoTarefa)
         .map((el, i) => aplicarEventosNaTarefa(el, tarefas[i]));
-
     elementosTarefas.forEach(tarefaEl => {
         divContainer.appendChild(tarefaEl);
     });
@@ -110,15 +102,13 @@ export function carregarTarefas(tarefas: Tarefa[], divContainer: HTMLDivElement)
 const aplicarEventosNaTarefa = (tarefaDiv: HTMLDivElement, tarefa: Tarefa) => {
     const checkbox = tarefaDiv.querySelector('.checkbox') as HTMLInputElement;
 
-    // Evento de conclusão
     checkbox.addEventListener('change', () => {
         atualizarStatusTarefa(tarefa.id, checkbox.checked);
         if (tarefa.autoconcluir === true) {
-            atualizarCheckboxSubtarefas(tarefa.id, checkbox.checked);
+            atualizarCheckboxSubtarefas(tarefa.id);
         }
     });
 
-    // Evento de clique para edição
     tarefaDiv.addEventListener('click', (event) => {
         if (!(event.target instanceof HTMLInputElement && event.target.classList.contains('checkbox'))) {
             abrirPopupEditarTarefa(tarefa.id);

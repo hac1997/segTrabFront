@@ -1,9 +1,9 @@
 import { criarListaContainer } from "../components/listaContainer.js";
 import { criarSubtarefaDiv, gerarEventListenersSubtarefa } from "../components/subtarefa.js";
-import { criarTarefaDiv } from "../components/tarefa.js";
+import { criarElementoTarefa, criarTarefaDiv } from "../components/tarefa.js";
 import { atualizarCheckboxSubtarefas, atualizarStatusTarefa } from "../task/task.js";
 import { media, puxarCheckedFiltroPrioridade, puxarCheckedFiltroStatus, puxarListas, puxarSubtarefas, puxarTarefas } from "../utils/utils.js";
-import { dataExpirada, getAnoSemana, parseDataBrasil } from "../utils/utilsDataHora.js";
+import { getAnoSemana, parseDataBrasil } from "../utils/utilsDataHora.js";
 import { filtrarTarefas, filtroOrdenarDescricao, filtroOrdenarPrioridade, filtroOrdernarTempo, ordenarTarefas } from "../utils/utilsFiltros.js";
 import { togglePopEditarTareda, togglePopTarefasAVencer } from "./uiPop.js";
 //constroi elementos
@@ -20,30 +20,6 @@ export function criarOpcaoLista(listaId, listaNome) {
     option.textContent = listaNome;
     return option;
 }
-export function criarElementoTarefa(tarefa) {
-    const tarefaDiv = document.createElement('div');
-    tarefaDiv.className = 'tarefa';
-    tarefaDiv.id = tarefa.id;
-    const prioridadeClasses = {
-        'Alta': "alta-prioridade",
-        'Moderada': "moderada-prioridade",
-        'Leve': "leve-prioridade"
-    };
-    const prioridadeClasse = prioridadeClasses[tarefa.prioridade];
-    if (prioridadeClasse)
-        tarefaDiv.classList.add(prioridadeClasse);
-    if (dataExpirada(tarefa.data, tarefa.hora))
-        tarefaDiv.className = 'tarefa expirada';
-    // Inner HTML
-    const tarefaExpiradaMsg = dataExpirada(tarefa.data, tarefa.hora) && !tarefa.concluida ? 'Tarefa Expirada!' : '';
-    tarefaDiv.innerHTML = `
-        <input type="checkbox" class="checkbox" ${tarefa.concluida ? 'checked' : ''} id="checkbox-${tarefa.id}">
-        <p>${tarefa.nome}</p>
-        <p>${tarefaExpiradaMsg}</p>
-    `;
-    return tarefaDiv;
-}
-;
 //preeenchem ou esvaziam elementos
 export function carregarValoresPopEditarTarefa(lista) {
     document.getElementById('id-lista-editar').value = lista.id;
@@ -68,7 +44,6 @@ export function esvaziarCamposCriarTarefaMenu() {
     document.getElementById('data-tarefa-menu').value = '';
     document.getElementById('hora-tarefa-menu').value = '';
 }
-//carregar elementos html
 export function carregarSubTarefas(tarefa, subdiv) {
     subdiv.innerHTML = "";
     let todasSubtarefas = puxarSubtarefas();
@@ -84,9 +59,7 @@ export function carregarTarefasAVencer(tarefas, divContainer) {
     tarefas.forEach(tarefa => {
         const tarefaDiv = criarTarefaDiv(tarefa);
         const checkbox = tarefaDiv.querySelector('.checkbox');
-        checkbox.addEventListener('change', () => {
-            atualizarStatusTarefa(tarefa.id, checkbox.checked);
-        });
+        checkbox.addEventListener('change', () => { atualizarStatusTarefa(tarefa.id, checkbox.checked); });
         tarefaDiv.addEventListener('click', (event) => {
             const target = event.target;
             if (target === null || target === void 0 ? void 0 : target.classList.contains('checkbox'))
@@ -111,14 +84,12 @@ export function carregarTarefas(tarefas, divContainer) {
 }
 const aplicarEventosNaTarefa = (tarefaDiv, tarefa) => {
     const checkbox = tarefaDiv.querySelector('.checkbox');
-    // Evento de conclusão
     checkbox.addEventListener('change', () => {
         atualizarStatusTarefa(tarefa.id, checkbox.checked);
         if (tarefa.autoconcluir === true) {
-            atualizarCheckboxSubtarefas(tarefa.id, checkbox.checked);
+            atualizarCheckboxSubtarefas(tarefa.id);
         }
     });
-    // Evento de clique para edição
     tarefaDiv.addEventListener('click', (event) => {
         if (!(event.target instanceof HTMLInputElement && event.target.classList.contains('checkbox'))) {
             abrirPopupEditarTarefa(tarefa.id);
@@ -234,3 +205,4 @@ export function preencherGraficoPizza(percConcluidas, percPendentes) {
         )`;
     }
 }
+//# sourceMappingURL=ui.js.map

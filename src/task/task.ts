@@ -25,12 +25,12 @@ export function atualizarStatusTarefa(tarefaId: string, concluida: boolean): voi
 }
 
 
-export function atualizarCheckboxSubtarefas(tarefaid: string, checked: boolean) {
+export function atualizarCheckboxSubtarefas(tarefaid: string) {
     const subtarefas = puxarSubtarefas();
 
     subtarefas.forEach(subtarefa => {
         if (subtarefa.idTarefaMae === tarefaid) {
-            subtarefa.concluida = checked;
+            subtarefa.concluida = true;
         }
     });
     localStorage.setItem('subtarefas', JSON.stringify(subtarefas));

@@ -17,7 +17,6 @@ export function criarElementoTarefa(tarefa: Tarefa) {
     const tarefaDiv = document.createElement('div');
     tarefaDiv.className = 'tarefa';
     tarefaDiv.id = tarefa.id;
-
     const prioridadeClasses = {
         'Alta': "alta-prioridade",
         'Moderada': "moderada-prioridade",
@@ -28,7 +27,6 @@ export function criarElementoTarefa(tarefa: Tarefa) {
     if (dataExpirada(tarefa.data, tarefa.hora)) {
         tarefaDiv.classList.add('expirada');
     }
-    // Inner HTML
     const tarefaExpiradaMsg = dataExpirada(tarefa.data, tarefa.hora) && !tarefa.concluida ? 'Tarefa Expirada!' : '';
 
     tarefaDiv.innerHTML = `

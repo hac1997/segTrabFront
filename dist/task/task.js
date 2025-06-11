@@ -13,11 +13,11 @@ export function atualizarStatusTarefa(tarefaId, concluida) {
     });
     localStorage.setItem('tarefas', JSON.stringify(tarefasAtualizadas));
 }
-export function atualizarCheckboxSubtarefas(tarefaid, checked) {
+export function atualizarCheckboxSubtarefas(tarefaid) {
     const subtarefas = puxarSubtarefas();
     subtarefas.forEach(subtarefa => {
         if (subtarefa.idTarefaMae === tarefaid) {
-            subtarefa.concluida = checked;
+            subtarefa.concluida = true;
         }
     });
     localStorage.setItem('subtarefas', JSON.stringify(subtarefas));
@@ -29,3 +29,4 @@ export function abrirPopCriarTarefa() {
     esvaziarCamposCriarTarefaMenu();
     togglePopCriarTarefaMenu(true);
 }
+//# sourceMappingURL=task.js.map

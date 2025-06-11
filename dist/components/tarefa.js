@@ -35,3 +35,4 @@ export function criarElementoTarefa(tarefa) {
     return tarefaDiv;
 }
 ;
+//# sourceMappingURL=tarefa.js.map
