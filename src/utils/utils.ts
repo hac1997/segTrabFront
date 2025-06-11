@@ -1,5 +1,5 @@
-import { construirLista, construirSubtarefa, construirTarefa, Lista, Prioridade, Subtarefa, Tarefa } from "../types/types";
-import { validaData, validaHora } from "./utilsDataHora";
+import { construirLista, construirSubtarefa, construirTarefa, Lista, Prioridade, Subtarefa, Tarefa } from "../types/types.js";
+import { validaData, validaHora } from "./utilsDataHora.js";
 //Importação de dados do Local Storage
 
 export function puxarTarefas(): Tarefa[] {

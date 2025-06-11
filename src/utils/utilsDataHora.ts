@@ -1,4 +1,4 @@
-import { Tarefa } from "../types/types";
+import { Tarefa } from "../types/types.js";
 // funções de validação de datas e horas
 
 

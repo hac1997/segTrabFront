@@ -1,33 +1,20 @@
-import { Tarefa } from "../types/types.js";
 import { construirOpcoesSelectListas, esvaziarCamposCriarTarefaMenu } from "../ui/ui.js";
 import { togglePopCriarTarefaMenu } from "../ui/uiPop.js";
 import { puxarSubtarefas, puxarTarefas } from "../utils/utils.js";
 import { formatarData, formatarHora } from "../utils/utilsDataHora.js";
-
-
-export function atualizarStatusTarefa(tarefaId: string, concluida: boolean): void {
-    const tarefas: Tarefa[] = puxarTarefas();
+export function atualizarStatusTarefa(tarefaId, concluida) {
+    const tarefas = puxarTarefas();
     const dataTermino = new Date();
-
     const tarefasAtualizadas = tarefas.map(tarefa => {
         if (tarefa.id === tarefaId) {
-            return {
-                ...tarefa,
-                concluida,
-                dataConclusao: concluida ? formatarData(dataTermino) : "",
-                horaConclusao: concluida ? formatarHora(dataTermino) : ""
-            };
+            return Object.assign(Object.assign({}, tarefa), { concluida, dataConclusao: concluida ? formatarData(dataTermino) : "", horaConclusao: concluida ? formatarHora(dataTermino) : "" });
         }
         return tarefa;
     });
-
     localStorage.setItem('tarefas', JSON.stringify(tarefasAtualizadas));
 }
-
-
-export function atualizarCheckboxSubtarefas(tarefaid: string, checked: boolean) {
+export function atualizarCheckboxSubtarefas(tarefaid, checked) {
     const subtarefas = puxarSubtarefas();
-
     subtarefas.forEach(subtarefa => {
         if (subtarefa.idTarefaMae === tarefaid) {
             subtarefa.concluida = checked;
@@ -35,11 +22,10 @@ export function atualizarCheckboxSubtarefas(tarefaid: string, checked: boolean) 
     });
     localStorage.setItem('subtarefas', JSON.stringify(subtarefas));
 }
-
 export function abrirPopCriarTarefa() {
-    const selectLista = document.getElementById('lista-criar-tarefa-menu') as HTMLDivElement;
+    const selectLista = document.getElementById('lista-criar-tarefa-menu');
     selectLista.innerHTML = "";
     construirOpcoesSelectListas(selectLista);
     esvaziarCamposCriarTarefaMenu();
-    togglePopCriarTarefaMenu(true)
+    togglePopCriarTarefaMenu(true);
 }

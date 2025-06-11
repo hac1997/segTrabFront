@@ -1,4 +1,4 @@
-import { gerarIdUnico } from "../utils/utils";
+import { gerarIdUnico } from "../utils/utils.js";
 
 // export type TipoOrdenacao = "ord-prioridade" | "ord-Nome" | "ord-data-conclusao" | "ord-nenhuma"
 // export type OrdemOrdenacao = "ord-asc" | "ord-desc" 

@@ -1,14 +1,10 @@
 import { atualizarStatusTarefa } from "../task/task.js";
-import { Subtarefa, Tarefa } from "../types/types.js";
 import { salvarSubtarefas } from "../utils/utils.js";
 import { confereCheckbox } from "../utils/utilsFiltros.js";
-
-export function criarSubtarefaDiv(subtarefa: Subtarefa): HTMLDivElement {
+export function criarSubtarefaDiv(subtarefa) {
     const subtarefaDiv = document.createElement("div");
     subtarefaDiv.className = "subtarefa-container";
-
     subtarefaDiv.id = `subtarefa-${subtarefa.id}`;
-
     subtarefaDiv.innerHTML =
         `
             <div><input type="checkbox" class="checkbox-sub" id="subtarefa-checkbox-${subtarefa.id}" ${subtarefa.concluida ? "checked" : ""}> </div>   
@@ -17,12 +13,10 @@ export function criarSubtarefaDiv(subtarefa: Subtarefa): HTMLDivElement {
             </div>
             <br>
             `;
-
     return subtarefaDiv;
 }
-
-export function gerarEventListenersSubtarefa(subtarefaDiv: HTMLDivElement, subtarefa: Subtarefa, todasSubtarefas: Subtarefa[], tarefa: Tarefa) {
-    const checkbox = subtarefaDiv.querySelector("#subtarefa-checkbox-" + subtarefa.id) as HTMLInputElement;
+export function gerarEventListenersSubtarefa(subtarefaDiv, subtarefa, todasSubtarefas, tarefa) {
+    const checkbox = subtarefaDiv.querySelector("#subtarefa-checkbox-" + subtarefa.id);
     checkbox.addEventListener("change", () => {
         subtarefa.concluida = checkbox.checked;
         salvarSubtarefas(todasSubtarefas);
@@ -31,12 +25,10 @@ export function gerarEventListenersSubtarefa(subtarefaDiv: HTMLDivElement, subta
         if (tarefa.autoconcluir) {
             atualizarStatusTarefa(tarefa.id, todasConcluidas);
             const idCheck = "checkbox-" + tarefa.id;
-            (document.getElementById(idCheck) as HTMLInputElement).checked = todasConcluidas
+            document.getElementById(idCheck).checked = todasConcluidas;
         }
     });
-
-    const btnRemoverSubtarefa = subtarefaDiv.querySelector(".btn-remover-subtarefa") as HTMLButtonElement;
-
+    const btnRemoverSubtarefa = subtarefaDiv.querySelector(".btn-remover-subtarefa");
     btnRemoverSubtarefa.addEventListener("click", () => {
         todasSubtarefas = todasSubtarefas.filter((s) => s.id !== subtarefa.id);
         salvarSubtarefas(todasSubtarefas);
